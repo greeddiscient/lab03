@@ -19,13 +19,21 @@ public class Debug {
 			Debug remainder = new Debug(myString.substring(1));
 			return remainder.contains1MoreThan(s.substring(1));
 		} else {
-			return myString.substring(1) == s;
+			return myString.substring(1).equals(s);
 		}
 	}
 
-	public static void main(String[] args) {
+	
+	
+	public static void main(String[] args) {			
 		check("abc", "def"); // should be false
 		check("abc2", "abc"); // should be true
+		check("1234", "123");
+		check("123", "123");
+		check("3212","212");
+		check("abc1", "ab1");
+		check("a1bc","abc");
+		check("bcad", "abc");
 	}
 
 	public static void check(String s1, String s2) {

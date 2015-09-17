@@ -3,12 +3,19 @@
  * amount in US dollars.
  */
 public class Account {
-
+	
+	public Account parentAccount;
 	/**
 	 * Initialize an account with the given balance.
 	 */
 	public Account(int balance) {
 		this.myBalance = balance;
+		this.parentAccount=null;
+	}
+	
+	public Account(int balance, Account od){
+		this.myBalance= balance;
+		this.parentAccount= od;
 	}
 
 	/**
@@ -27,14 +34,43 @@ public class Account {
 	 * would leave a negative balance, print an error message and leave the
 	 * balance unchanged.
 	 */
-	public void withdraw(int amount) {
+	public boolean withdraw(int amount) {
 		if (amount < 0) {
 			System.out.println("Cannot withdraw negative amount.");
+			return false;
 		} else if (this.myBalance < amount) {
-			System.out.println("Insufficient funds");
+			
+			if (this.parentAccount!=null && amount <= this.myBalance + this.parentAccount.myBalance)
+			{
+				this.myBalance= 0;
+				this.parentAccount.withdraw(amount-this.myBalance);
+				return true;
+			}
+			else
+			{
+				System.out.println("Insufficient funds on protection account.");
+				return false;
+			}
+			
+			
+			
 		} else {
 			this.myBalance = this.myBalance - amount;
+			return true;
 		}
+	}
+	
+	/**
+	 * Merge account "anotherAcct" into this one by
+	 * removing all the money from anotherAcct and
+	 * adding that amount to this one.
+	 */
+	public void merge (Account anotherAcct) {
+	    // TODO Put your own code here
+		this.myBalance += anotherAcct.myBalance;
+		anotherAcct.myBalance=0;
+		
+		
 	}
 
 	/**

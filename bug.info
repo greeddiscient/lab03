@@ -1,0 +1,11 @@
+1. returns true if the string's first length-1 characters are the same as the string it is being compared to. (abc, abc1). if the character insterted is at the end of the string.
+
+2. returns false if 
+
+3. it doesn't falsely return true on any pairs.
+
+4. it falsely returns false if the character being inserted is in the front or the middle.
+
+5. never crashes.
+
+The bug is in the comparison of Strings. before we used == which is the reference but after i changed it to the built in method .equals() then it corrects itself for everything.
